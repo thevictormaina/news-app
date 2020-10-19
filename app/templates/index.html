@@ -1,5 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-4">
+                <div id="sources-left">
+                    {% for source in sources %}
+                    <a href="/">
+                        <div class="source">
+                            <h4> {{ source.name }} </h3>
+                            <p> {{ source.description }} </p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="headlines-right">
 
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

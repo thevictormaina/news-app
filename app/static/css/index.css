@@ -1,12 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 
 body,
-html {
-    background: #e5e5e5;
+html,
+#navbar {
+    background: #fefefe;
+    font-family: "Ubuntu";
+}
+
+#navbar {
+    z-index: 100;
+    max-height: 90px;
+    margin-bottom: 30px;
 }
 
 [alt="logo"] {
-    height: 70px;
+    height: 60px;
 }
 
 .content {
@@ -22,11 +30,33 @@ html {
 }
 
 .nav {
-    margin-top: 20px;
+    margin-top: 25px;
     font-size: 1.25em;
-    font-family: "Ubuntu";
     font-weight: 400;
 }
 .nav a {
     color: black;
+}
+#sources-left {
+    padding: 20px;
+    background: #ffb899;
+    border-radius: 20px 0px 0px 0px;
+}
+#headlines-right {
+    padding: 20px;
+    background: #a799ff;
+    border-radius: 0px 20px 0px 0px;
+}
+.source {
+    background: #262626;
+    color: white;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 5px;
+}
+.source h3 {
+    font-weight: 700;
+}
+#sources-left a:hover {
+    text-decoration: none;
 }
