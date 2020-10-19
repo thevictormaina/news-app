@@ -12,42 +12,64 @@ def configure_request(app):
 
     print(base_url)
 
-def get_sources():
+def api_request(endpoint):
     """
     Function to call list of sources from api
     """
 
-    source_url = base_url.format("sources", api_key)
+    if endpoint == "sources":
+        request_url = base_url.format(endpoint, api_key)
+    elif endpoint == "top-headlines":
+        request_url = base_url.format(endpoint, api_key) + "&category=general"
+    else:
+        request_url = None
 
-    print(api_key, "\n", source_url)
+    print(api_key, "\n", request_url)
 
-    with urllib.request.urlopen(source_url) as url:
-        search_data = url.read()
-        search_response = json.loads(search_data)
+    with urllib.request.urlopen(request_url) as url:
+        request_data = url.read()
+        api_response = json.loads(request_data)
 
-        sources_results = None
+        response_list = None
 
-        if search_response["sources"]:
-            sources_results = process_source_results(search_response["sources"])
+        if api_response["status"] == "ok":
+            response_list = process_response(api_response)
         
-        return sources_results
+        return response_list
 
-def process_source_results(result_list):
+def process_response(api_response):
     """
     Function that turn returns from api into list of objects
     """
     results = []
 
-    for source in result_list:
-        id = source.get("id")
-        name = source.get("name")
-        description = source.get("description")
-        url = source.get("url")
-        category = source.get("category")
-        country = source.get("country")
-        source = Source(id, name, description, url, category, country)
+    if api_response["sources"]:
+        for source in api_response["sources"]:
+            id = source.get("id")
+            name = source.get("name")
+            description = source.get("description")
+            url = source.get("url")
+            category = source.get("category")
+            country = source.get("country")
 
-        results.append(source)
-    
+            result = Source(id, name, description, url, category, country)
+
+            results.append(result)
+
+    elif api_response["articles"]:
+        for article in api_response["articles"]:
+            source_id = article.get("source.id")
+            source_name = article.get("source.name")
+            author = article.get("author")
+            title = article.get("title")
+            description = article.get("description")
+            url = article.get("url")
+            url_to_image = article.get("urlToImage")
+            published_at = article.get("publishedAt")
+
+            result = Article(source_id, source_name, author, title, description, url, url_to_image, published_at)
+
+            results.append(result)
+
     return results
 
