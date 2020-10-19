@@ -10,8 +10,6 @@ def configure_request(app):
     api_key = app.config["NEWS_API_KEY"]
     base_url = app.config["NEWS_API_BASE_URL"]
 
-    print(base_url)
-
 def api_request(endpoint):
     """
     Function to call list of sources from api
@@ -23,8 +21,6 @@ def api_request(endpoint):
         request_url = base_url.format(endpoint, api_key) + "&category=general"
     else:
         request_url = None
-
-    print(api_key, "\n", request_url)
 
     with urllib.request.urlopen(request_url) as url:
         request_data = url.read()
@@ -72,4 +68,3 @@ def process_response(api_response):
             results.append(result)
 
     return results
-

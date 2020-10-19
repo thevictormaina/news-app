@@ -11,6 +11,5 @@ def index():
     View function that returns root page index.html
     """
     sources_list = api_request("sources")
-    print("\n Api response: ", sources_list, "\n")
 
     return render_template("index.html", sources = sources_list)
