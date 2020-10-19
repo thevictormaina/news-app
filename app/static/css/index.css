@@ -60,3 +60,6 @@ html,
 #sources-left a:hover {
     text-decoration: none;
 }
+#sources-left .text-center {
+    margin-bottom: 20px;
+}
