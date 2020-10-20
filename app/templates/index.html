@@ -4,11 +4,11 @@
 {% block content %}
     <div class="container content">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-sm-5">
                 <div id="sources-left">
                     <h4 class="text-center">News Sources</h4>
                     {% for source in sources %}
-                    <a href="/">
+                    <a href="/source/{{ source.id }}">
                         <div class="source">
                             <h4> {{ source.name }} </h3>
                             <p> {{ source.description }} </p>
@@ -17,7 +17,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-sm-7">
                 <div id="headlines-right">
                     <h4 class="text-center">Top Headlines</h4>
                     {{ macro.showArticlesList(headlines) }}

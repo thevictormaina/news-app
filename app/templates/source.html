@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% import "macros.html" as macro %}
+
+{% block content %}
+
+<div class="container content">
+    <div class="row">
+        <div class="col-sm-5">
+            <div id="sources-left">
+                <h4 class="text-center"><strong>News Source</strong></h4>
+                <div class="source">
+                    <h3 class=""><strong>{{ source.name }}</strong></h3>
+                    <p>{{ source.description }}</p>
+                    <p>
+                        <a href="{{source.url}}">Visit website</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div id="headlines-right">
+                <h4 class="text-center">News Articles</h4>
+                {{ macro.showArticlesList(articles) }}
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

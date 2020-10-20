@@ -1,5 +1,6 @@
 import unittest
 from app.models import Source
+from app.requests import api_request
 
 class SourceTest(unittest.TestCase):
     """
@@ -17,6 +18,7 @@ class SourceTest(unittest.TestCase):
         Method to reset instances after each test runs
         """
         pass
+
     def test_init(self):
         """
         Test if news source object is initialized properly

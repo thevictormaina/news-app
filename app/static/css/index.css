@@ -39,11 +39,13 @@ html,
 }
 #sources-left {
     padding: 20px;
+    min-height: 600px;
     background: #E5E5E5;
     border-radius: 20px 0px 0px 0px;
 }
 #headlines-right {
     padding: 20px;
+    min-height: 600px;
     background: #ffb899;
     border-radius: 0px 20px 0px 0px;
 }
@@ -90,4 +92,7 @@ html,
     font-size: 1.38em;
     font-weight: 700;
     color: #000000;
+}
+.source p a, .source p a:hover, .source p a:active{
+    color: rgb(0, 180, 255);
 }

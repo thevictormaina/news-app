@@ -1,14 +1,17 @@
-import urllib.request, json
+import urllib.request
+import json
 from .models import Source, Article
 
 # Get api key and base url
 api_key = None
 base_url = None
 
+
 def configure_request(app):
     global api_key, base_url
     api_key = app.config["NEWS_API_KEY"]
     base_url = app.config["NEWS_API_BASE_URL"]
+
 
 def api_request(endpoint):
     """
@@ -18,7 +21,9 @@ def api_request(endpoint):
     if endpoint == "sources":
         request_url = base_url.format(endpoint, api_key)
     elif endpoint == "top-headlines":
-        request_url = base_url.format("everything", api_key) + "&sortBy=publishedAt&pageSize=35" # Using everything endpoint to enable removing articles not written in English
+        # Using everything endpoint to enable removing articles not written in English
+        request_url = base_url.format(
+            "everything", api_key) + "&sortBy=publishedAt&pageSize=35"
     else:
         request_url = None
 
@@ -26,16 +31,13 @@ def api_request(endpoint):
         request_data = url.read()
         api_response = json.loads(request_data)
 
-        print("\n")
-        print("Api response: ", api_response)
-        print("\n")
-
         response_list = None
 
         if api_response["status"] == "ok":
             response_list = process_response(api_response)
-        
+
         return response_list
+
 
 def process_response(api_response):
     """
@@ -76,9 +78,40 @@ def process_response(api_response):
             url_to_image = article.get("urlToImage")
             published_at = article.get("publishedAt")
 
-            result = Article(source_id, source_name, author, title, description, url, url_to_image, published_at)
+            result = Article(source_id, source_name, author, title,
+                             description, url, url_to_image, published_at)
 
             if result.url_to_image:
                 results.append(result)
 
     return results
+
+def request_source(id):
+    """
+    Returns tuple with source object and articles by id
+    """
+    # Create source object
+    sources = api_request("sources")
+
+    # Search sources list by id for specific source
+    source_result = None
+
+    for source in sources:
+        if source.id == id:
+            source_result = source
+
+    # Search API for all articles of source
+
+    request_url = base_url.format(
+        "everything", api_key) + f"&sources={id}&sortBy=publishedAt&pageSize=35"
+
+    with urllib.request.urlopen(request_url) as url:
+        request_data = url.read()
+        api_response = json.loads(request_data)
+
+        source_articles = None
+
+        if api_response["status"] == "ok":
+            source_articles = process_response(api_response)
+
+    return source_result, source_articles
