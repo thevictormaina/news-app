@@ -61,9 +61,15 @@ def process_response(api_response):
         articles = api_response.get("articles")
 
         for article in articles:
-            source_id = article.get("source")
-            source_name = article.get("source")
-            author = article.get("author")
+            source = article.get("source")
+            source_id = source.get("id")
+            source_name = source.get("name")
+
+            if article["author"] == None:
+                author = source_name
+            else:
+                author = article.get("author")
+
             title = article.get("title")
             description = article.get("description")
             url = article.get("url")
