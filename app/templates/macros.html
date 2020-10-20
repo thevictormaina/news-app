@@ -1,6 +1,6 @@
 {% macro showArticlesList(articles) %}
     {% for article in articles %}
-        <a href="/">
+        <a href="{{ article.url }}" target="_blank">
             <div class="article">
                 <div class="article-img" style="background: url({{article.url_to_image}});"></div>
         
