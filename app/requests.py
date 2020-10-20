@@ -18,7 +18,7 @@ def api_request(endpoint):
     if endpoint == "sources":
         request_url = base_url.format(endpoint, api_key)
     elif endpoint == "top-headlines":
-        request_url = base_url.format(endpoint, api_key) + "&category=general&pageSize=100"
+        request_url = base_url.format("everything", api_key) + "&sortBy=popularity&pageSize=40" # Using everything endpoint to enable removing articles not written in English
     else:
         request_url = None
 
