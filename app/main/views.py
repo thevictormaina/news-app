@@ -11,5 +11,6 @@ def index():
     View function that returns root page index.html
     """
     sources_list = api_request("sources")
+    headlines = api_request("top-headlines")
 
-    return render_template("index.html", sources = sources_list)
+    return render_template("index.html", sources = sources_list, headlines = headlines)

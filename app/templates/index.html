@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container content">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div id="sources-left">
                     <h4 class="text-center">News Sources</h4>
                     {% for source in sources %}
@@ -16,12 +16,20 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div id="headlines-right">
                     <h4 class="text-center">Top Headlines</h4>
-                    {% for article in articles %}
+                    {% for article in headlines %}
                     <a href="/">
-                        <
+                        <div class="article">
+                            <div class="article-img" style="background: url({{article.url_to_image}});"></div>
+
+                            <div class="article-content">
+                                <p>
+                                    <span class="author">By {{ article.author }}</span> · <span class="headline"> {{ article.published_at }} </span>
+                                </p>
+                            </div>
+                        </div>
                     </a>
                     {% endfor %}
                 </div>

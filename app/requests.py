@@ -18,13 +18,17 @@ def api_request(endpoint):
     if endpoint == "sources":
         request_url = base_url.format(endpoint, api_key)
     elif endpoint == "top-headlines":
-        request_url = base_url.format(endpoint, api_key) + "&category=general"
+        request_url = base_url.format(endpoint, api_key) + "&category=general&pageSize=100"
     else:
         request_url = None
 
     with urllib.request.urlopen(request_url) as url:
         request_data = url.read()
         api_response = json.loads(request_data)
+
+        print("\n")
+        print("Api response: ", api_response)
+        print("\n")
 
         response_list = None
 
@@ -39,8 +43,9 @@ def process_response(api_response):
     """
     results = []
 
-    if api_response["sources"]:
-        for source in api_response["sources"]:
+    if api_response.get("sources"):
+        sources = api_response.get("sources")
+        for source in sources:
             id = source.get("id")
             name = source.get("name")
             description = source.get("description")
@@ -52,10 +57,12 @@ def process_response(api_response):
 
             results.append(result)
 
-    elif api_response["articles"]:
-        for article in api_response["articles"]:
-            source_id = article.get("source.id")
-            source_name = article.get("source.name")
+    elif api_response.get("articles"):
+        articles = api_response.get("articles")
+
+        for article in articles:
+            source_id = article.get("source")
+            source_name = article.get("source")
             author = article.get("author")
             title = article.get("title")
             description = article.get("description")
@@ -65,6 +72,7 @@ def process_response(api_response):
 
             result = Article(source_id, source_name, author, title, description, url, url_to_image, published_at)
 
-            results.append(result)
+            if result.url_to_image:
+                results.append(result)
 
     return results
