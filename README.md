@@ -9,13 +9,39 @@ The Modern Post is a simple Flask app that collects news articles from all aroun
 
 ## Setup/Installation Requirements
 
-The app is deployed on Heroku, but you can also run it locally on your computer. To do this, 
+The app is deployed on Heroku, but you can also run it locally on your computer. First make sure Python3, pip, and Git are installed.
+```
+$ python3 --version
+$ pip --version
+$ git --version
+```
+If you don't have the above, install the like this:
+```
+$ sudo apt install python3 python3-pip git
+```
+Once installed, clone the app from this repository to you machine
+```
+$ git clone https://github.com/VictorKMaina/news-app.git
+$ cd news-app//
+```
+This app requires Flask and some other dependencies to run, which are all installed in the virtual environment. To run the app, you need to activate the virtual environment. Firts make sure you're in the `news-app/` folder, then do
+```
+$ source virtual/bin/activate
+```
+If the virtual environment activated successfully, you should see something like this
+```
+(virtual) username@PC:~/../news-app$ 
+```
+Congratulations! You are now ready to run the app.
+```
+$ ./start.sh
+```
 
 ## Known Issues
+Due to a routing bug, the app doesn't display the custom 404 page.
 
 ## Support and contact details
 If you have any issues, questions, or ideas concerning the app, you can [email me](mailto:contact@victormaina.com).
 
-## [LICENSE](./LICENSE)
 
-## [LICENSE](/LICENSE)
+## [LICENSE](./LICENSE)
