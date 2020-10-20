@@ -6,9 +6,9 @@
         
                 <div class="article-content">
                     <div class="article-info">
-                        <span>By {{ article.author }}</span>
+                        <span>By {{ article.author | truncate(30) }}</span>
                         <b> · </b>
-                        <span> {{ article.published_at }} </span>
+                        <span> {{ article.format_time() }} </span>
                     </div>
                     <div class="article-headline">
                         {{ article.title }}

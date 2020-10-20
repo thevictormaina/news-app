@@ -24,3 +24,12 @@ class TestArticle(unittest.TestCase):
         """
         self.assertIsInstance(self.new_article, Article
         )
+    def test_format_time(self):
+        """
+        Test case to check if date is being formatted correctly
+        """
+        date_time = self.new_article.format_time()
+        
+        self.assertEqual(date_time, "23:16 Sept 24, 2020")
+
+        

@@ -23,3 +23,30 @@ class Article:
         self.url = url
         self.url_to_image = url_to_image
         self.published_at = published_at
+    
+    def format_time(self):
+        """
+        Method to make published_at more readable
+
+        Args:
+            self
+            api_time: time value received from News API
+        """
+        months_list = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+
+        published_at_split = self.published_at.split("T")
+        date_split = published_at_split[0].split("-")
+        time_split = published_at_split[1].split(":")
+
+        formatted_time = time_split[0] + ":" + time_split[1] # hour:minute, 24-hour time format
+
+        formatted_year = date_split[0]
+        formatted_month = months_list[ int(date_split[1]) - 1 ]
+        formatted_date = date_split[2]
+
+        date = "{} {} {}, {}".format(formatted_time, formatted_month, formatted_date, formatted_year)
+
+        return date
+
+
+        
