@@ -1,4 +1,5 @@
-virtual/
+env/
+.env
 *.pyc
 instance/
 notes.txt
